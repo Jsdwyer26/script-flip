@@ -15,7 +15,6 @@ var words = new pos.Lexer().lex(aLittleFable);
 var tagger = new pos.Tagger();
 var taggedWords = tagger.tag(words);
 
-//Globals for varibles passed through POS iteration.
 var checkedText = [];
 
 for (var i in taggedWords) {

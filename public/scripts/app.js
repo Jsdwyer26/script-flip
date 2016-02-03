@@ -70,28 +70,24 @@ app.controller('StoryCtrl', ['$scope', 'Story', '$routeParams', function($scope,
   $scope.story = Story.get({
     id: $routeParams.id
   });
-
   $scope.formatForDisplay = function(word) {
     if (typeof(word) == 'string') {
       return word;
     } else {
-      return '<span class="hidden">' + word[0] + '</span><span class="underline">' + word[1] + '</span>';
+      return '<span class="english hidden">' + word[0] + '</span><span class="js underline">' + word[1] + '</span>';
     }
   };
-
   //Animation name. 
   var animationType = 'animated bounce';
-  $('#storyTitle').addClass('animated rubberBand');
-  //Toggles underline class when clicked.
-  /*$('#story').click(function(e) {
-    $(e.target).toggleClass('underline');
-  });*/
 
-  $('#story').on('mouseover', function(e) {
+  $('#storyTitle').addClass('animated rubberBand');
+  /*$('#story').on('mouseover', function(e) {
     $(e.target).toggleClass(animationType).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
       $(this).removeClass(animationType);
     });
-    $(e.target).toggleClass('underline');
+  });*/
+  $('span').on('mouseover', function(e) {
+    console.log('mouseover');
   });
 
 }]);

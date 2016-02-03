@@ -2,7 +2,7 @@
 <div id='story'>
   <!-- Span inside spans. -->
   <span ng-repeat='v in story.words track by $index'>
-    <span ng-bind-html="formatForDisplay(v)"></span>
+    <span ng-bind-html="formatForDisplay(v)" ng-mouseover="myClass='wordOver'" ng-mouseout="myClass=''"></span>
   </span>
 </div>
 <div class='storyButtons'>

@@ -3,13 +3,8 @@
  } 
  
  /*Homepage Styles */
-/*ul {
-  list-style-type: none;
-  text-align: center;
-}*/
 .siteTitle {
-  font-size: 2.0em;
-  font-weight: 100;
+  font-size: 3.0em;
 }
 .homeTitles {
   font-size: 2.0em;
@@ -55,11 +50,19 @@ li a {
   padding: 20px 45px 75px;
   word-spacing: .25em;
 }
+.hidden {
+  display: none;
+  visibility: hidden;
+}
 /*Underline Styling*/
 .underline {
   color: black;
   cursor: pointer;
   text-decoration: underline;
+}
+.wordOver {
+  font-size: 3em;
+  color: red;
 } 
 /*Bottom of story page links. */
 .storyButtons {
@@ -69,10 +72,7 @@ li a {
   color: rgba(0, 0, 0, .6);
   font-weight: 200;
 }
-.hidden {
-  display: none;
-  visibility: hidden;
-}
+
 
 /*About Page */
 #aboutTitle {
