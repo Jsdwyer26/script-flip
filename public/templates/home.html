@@ -1,0 +1,9 @@
+<h3 class= "siteTitle"> Some Website Name</h3>
+<a ng-href="/about">About</a>
+<div>
+  <ul>
+    <li ng-repeat="v in stories" class="homeTitles" ng-mouseover="myClass='titleOver'" ng-mouseout="myClass=''">
+      <a class="titleBase" ng-href="/story/{{v._id}}" ng-class="myClass">{{ v.title }}</a>
+    </li>
+  </ul>
+</div>

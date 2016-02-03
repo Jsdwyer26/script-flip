@@ -1,0 +1,100 @@
+ body {
+  background-color: #FFF6E5;
+ } 
+ 
+ /*Homepage Styles */
+/*ul {
+  list-style-type: none;
+  text-align: center;
+}*/
+.siteTitle {
+  font-size: 2.0em;
+  font-weight: 100;
+}
+.homeTitles {
+  font-size: 2.0em;
+  font-weight: 100;
+  font-style: italic;
+  line-height: 1.5;
+  list-style-type: none;
+  letter-spacing: .03em;
+  padding: .35em;
+  text-align: center;
+}
+a {
+  color: rgb(0, 0, 0);
+}
+li a {
+  color: rgba(0, 0, 0, 1);
+  text-decoration: none;
+}
+.titleBase {
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+.titleBase.titleOver {
+  font-size: 1.2em;
+}
+
+/* Story page*/
+#storyTitle {
+  color: #704214;
+  font-size: 2.7em;
+/*  font-weight: 500;*/
+  text-align: center;
+}
+#story {
+  color: #704214;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: 200;
+  text-indent: 3em;
+  text-align: left;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  margin: 10px 80px 10px;
+  padding: 20px 45px 75px;
+  word-spacing: .25em;
+}
+/*Underline Styling*/
+.underline {
+  color: black;
+  text-decoration: underline;
+} 
+/*Bottom of story page links. */
+.storyButtons {
+  text-align: center;
+}
+.storyButtons a {
+  color: rgba(0, 0, 0, .6);
+  font-weight: 200;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+/*About Page */
+#aboutTitle {
+  color: rgb(0, 0, 0);
+  font-family: "Roboto", sans-serif;
+  font-size: 3em;
+  font-weight: 200;
+  /*padding: .75em;*/
+  text-align: center;
+}
+#aboutBody {
+  color: rgb(0, 0, 0);
+  font-family: "Roboto", sans-serif;
+  font-size: 2em;
+  font-weight: 100;
+  text-align: center;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  margin: 10px 80px 10px;
+  padding: 20px 45px 75px;
+  word-spacing: .25em;
+}
+
+
+
