@@ -1,11 +1,11 @@
-
 <h3 id='storyTitle'><i>{{ story.title }}</i></h3>
-<span ng-repeat= 'v in story.words track by $index'>
-  <span ng-bind-html="formatForDisplay(v)"> 
+<div id='story'>
+  <!-- Span inside spans. -->
+  <span ng-repeat='v in story.words track by $index'>
+    <span ng-bind-html="formatForDisplay(v)"></span>
   </span>
-</span>  
+</div>
 <div class='storyButtons'>
   <a ng-href="/">Back Home</a> ||
   <a ng-href="/about">About</a>
-</div> 
-
+</div>
