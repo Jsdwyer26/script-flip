@@ -2,9 +2,9 @@
   <br>
   <h3 id='storyTitle'><i>{{ story.title }}</i></h3>
   <div id='story'>
-    <span ng-repeat='v in story.words track by $index'>
-      <span ng-bind-html="formatForDisplay(v)" ng-mouseover="myClass='wordOver'" ng-mouseout="myClass=''"></span>
-    </span>
+    <story-word ng-repeat='word in story.words track by $index' content="word">
+    
+    </story-word>
     <div class='storyButtons'>
       <br>
       <a ng-href="/">Back Home</a> ||

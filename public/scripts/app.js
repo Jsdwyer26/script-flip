@@ -49,19 +49,6 @@ app.controller('HomeCtrl', ['$scope', 'Story', function($scope, Story) {
   //'.query'--$resources, GET method, isArray:true.
   $scope.stories = Story.query();
 
-  $scope.onMouseOver = function(story) {
-    console.log(story);
-    $(this).addClass('animated bounce');
-    /*debugger*/
-  };
-
-  $('li > a').on('mouseover', function(e) {
-    console.log('mouseover');
-    $(e.target).addClass('animated bounce').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-      $(this).removeClass('animated bounce');
-    });
-  });
-
 }]);
 
 //Story page Ctrl.
@@ -70,25 +57,6 @@ app.controller('StoryCtrl', ['$scope', 'Story', '$routeParams', function($scope,
   $scope.story = Story.get({
     id: $routeParams.id
   });
-  $scope.formatForDisplay = function(word) {
-    if (typeof(word) == 'string') {
-      return word;
-    } else {
-      return '<span class="english hidden">' + word[0] + '</span><span class="js underline">' + word[1] + '</span>';
-    }
-  };
-  //Animation name. 
-  var animationType = 'animated bounce';
-
-  $('#storyTitle').addClass('animated rubberBand');
-  /*$('#story').on('mouseover', function(e) {
-    $(e.target).toggleClass(animationType).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-      $(this).removeClass(animationType);
-    });
-  });*/
-  $('span').on('mouseover', function(e) {
-    console.log('mouseover');
-  });
 
 }]);
 
@@ -96,3 +64,22 @@ app.controller('StoryCtrl', ['$scope', 'Story', '$routeParams', function($scope,
 app.controller('AboutCtrl', ['$scope', function($scope) {
   $scope.aboutCtrlTest = 'About Ctrl Test';
 }]);
+
+app.directive('storyWord', function ($compile) {
+    var linker = function(scope, element, attrs) {
+        scope.hi = function(content) { 
+          console.log('hi', content);
+        };
+        element.html('<span ng-mouseover="hi(content)">{{ content }} </span>').show();
+
+        $compile(element.contents())(scope);
+    };
+
+    return {
+        restrict: "E",
+        link: linker,
+        scope: {
+            content:'='
+        }
+    };
+});
