@@ -1,14 +1,20 @@
- body {
+ html {
   background-color: #FFF6E5;
  } 
  
  /*Homepage Styles */
-.siteTitle {
+ .navbar {
+  /*background-color: #B7521E;*/
+ }
+ .aboutLink {
+  color: white;
+ }
+/*.siteTitle {
   font-size: 3.0em;
-}
+}*/
 .homeTitles {
-  font-size: 2.0em;
-  font-weight: 100;
+  font-size: 3.0em;
+  font-weight: 300;
   font-style: italic;
   line-height: 1.5;
   list-style-type: none;

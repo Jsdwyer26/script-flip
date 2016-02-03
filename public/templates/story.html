@@ -1,11 +1,15 @@
-<h3 id='storyTitle'><i>{{ story.title }}</i></h3>
-<div id='story'>
-  <!-- Span inside spans. -->
-  <span ng-repeat='v in story.words track by $index'>
-    <span ng-bind-html="formatForDisplay(v)" ng-mouseover="myClass='wordOver'" ng-mouseout="myClass=''"></span>
-  </span>
-</div>
-<div class='storyButtons'>
-  <a ng-href="/">Back Home</a> ||
-  <a ng-href="/about">About</a>
-</div>
+<div class="content"> 
+  <br>
+  <h3 id='storyTitle'><i>{{ story.title }}</i></h3>
+  <div id='story'>
+    <span ng-repeat='v in story.words track by $index'>
+      <span ng-bind-html="formatForDisplay(v)" ng-mouseover="myClass='wordOver'" ng-mouseout="myClass=''"></span>
+    </span>
+    <div class='storyButtons'>
+      <br>
+      <a ng-href="/">Back Home</a> ||
+      <a ng-href="/about">About</a>
+    </div>
+  </div>
+
+</div> 
