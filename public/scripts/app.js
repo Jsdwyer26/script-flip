@@ -32,21 +32,12 @@ app.factory('Story', ['$resource', function($resource) {
       method: 'PUT'
     }
   });
-
-  /* $resource methods
-  { 'get':    {method:'GET'},
-    'save':   {method:'POST'},
-    'query':  {method:'GET', isArray:true},
-    'remove': {method:'DELETE'},
-    'delete': {method:'DELETE'} };*/
-
 }]);
 
 //CTRLers
 //Home Ctrl.
 app.controller('HomeCtrl', ['$scope', 'Story', function($scope, Story) {
   $scope.homeCtrlTest = 'Home Ctrl Test';
-  //'.query'--$resources, GET method, isArray:true.
   $scope.stories = Story.query();
 
 }]);
@@ -57,7 +48,6 @@ app.controller('StoryCtrl', ['$scope', 'Story', '$routeParams', function($scope,
   $scope.story = Story.get({
     id: $routeParams.id
   });
-
 }]);
 
 //About Ctrl.
@@ -65,21 +55,57 @@ app.controller('AboutCtrl', ['$scope', function($scope) {
   $scope.aboutCtrlTest = 'About Ctrl Test';
 }]);
 
-app.directive('storyWord', function ($compile) {
-    var linker = function(scope, element, attrs) {
-        scope.hi = function(content) { 
-          console.log('hi', content);
-        };
-        element.html('<span ng-mouseover="hi(content)">{{ content }} </span>').show();
-
-        $compile(element.contents())(scope);
+app.directive('storyWord', function($compile) {
+  var linker = function(scope, element, attrs) {
+    //Check if story is string. If not a string, no code counter-part.
+    scope.formatForShow = function(content) {
+      if(typeof(content) == 'string') {
+        return content;
+      } else {
+        return content[1];
+      }
     };
 
-    return {
-        restrict: "E",
-        link: linker,
-        scope: {
-            content:'='
-        }
+    scope.shouldShowCode = function(content) {
+      if (typeof(content) == 'string') {
+        return false;
+      } else {
+        return true;
+      }
     };
+    scope.codeStyle = function(content) {
+      if (typeof(content) == 'string') {
+        return '';
+      } else { 
+        return 'underline';
+      }
+    };
+
+    element.html(
+      '<br ng-show="index%10==0">' +
+      '<span ' + 
+        'ng-init="changeBack=true" ' +  
+        'ng-class="codeStyle(content)" ' + 
+        'ng-mouseover="showCode=changeBack && shouldShowCode(content)" ' + 
+        'ng-click="showCode=shouldShowCode(content)" ' + 
+        'ng-mouseout="changeBack=true" ' +
+        'ng-show="!showCode">{{ formatForShow(content) }}' + 
+        '</span>' + 
+      '<span ' + 
+        'class="underline" ' + 
+        'ng-show="showCode" '+ 
+        'ng-click="showCode=false; changeBack=false">{{ content[0] }}' + 
+        '</span> ').show();
+
+    $compile(element.contents())(scope);
+  };
+
+  return {
+    restrict: "E",
+    link: linker,
+    scope: {
+      content: '=',
+      index: '='
+    }
+  };
 });
