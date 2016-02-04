@@ -65,7 +65,7 @@ li a {
   color: black;
   cursor: pointer;
   text-decoration: underline;
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  /*transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;*/
 }
 .wordOver {
   font-size: 3em;
@@ -80,12 +80,32 @@ li a {
   font-weight: 200;
 }
 .jsWords {
+  opacity: 1;
   padding-right: .10em;
   padding-left: .10em;
 }
 .engWords {
+  opacity: 1;
   padding-right: .4em;
   padding-left: .4em;
+}
+/*
+Animate
+*/
+.ng-hide-remove {
+  /* this is required as of 1.3x to properly
+     apply all styling in a show/hide animation */
+  /*transition: all linear 0.5s;*/
+  transition: 1s linear all;
+}
+.ng-hide-remove-active {
+  /* the transition is defined in the active class */
+   /*transition: all linear 0.5s;*/
+   transition: 1s linear all;
+}
+.ng-hide {
+  line-height: 0;
+  opacity: 0;
 }
 /*About Page */
 #aboutTitle {
