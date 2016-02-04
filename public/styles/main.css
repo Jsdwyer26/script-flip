@@ -43,7 +43,8 @@ li a {
 /*  font-weight: 500;*/
   text-align: center;
 }
-.content {
+#story {
+  background-color: #FFF6E5;
   color: #704214;
   cursor: pointer;
   font-size: 1.5em;
@@ -78,8 +79,14 @@ li a {
   color: rgba(0, 0, 0, .6);
   font-weight: 200;
 }
-
-
+.jsWords {
+  padding-right: .10em;
+  padding-left: .10em;
+}
+.engWords {
+  padding-right: .4em;
+  padding-left: .4em;
+}
 /*About Page */
 #aboutTitle {
   color: rgb(0, 0, 0);

@@ -82,17 +82,20 @@ app.directive('storyWord', function($compile) {
     };
 
     element.html(
-      '<br ng-show="index%10==0">' +
+      //Min. width
+      //if 'content' === 
+      /*'<br ng-show="index%10==0">' +*/
       '<span ' + 
+        'class="jsWords" ' + 
         'ng-init="changeBack=true" ' +  
         'ng-class="codeStyle(content)" ' + 
-        'ng-mouseover="showCode=changeBack && shouldShowCode(content)" ' + 
+        /*'ng-mouseover="showCode=changeBack && shouldShowCode(content)" ' + */
         'ng-click="showCode=shouldShowCode(content)" ' + 
-        'ng-mouseout="changeBack=true" ' +
+        /*'ng-mouseout="changeBack=true" ' +*/
         'ng-show="!showCode">{{ formatForShow(content) }}' + 
         '</span>' + 
       '<span ' + 
-        'class="underline" ' + 
+        'class="engWords underline" ' + 
         'ng-show="showCode" '+ 
         'ng-click="showCode=false; changeBack=false">{{ content[0] }}' + 
         '</span> ').show();
