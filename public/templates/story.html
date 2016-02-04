@@ -3,6 +3,10 @@
     <div class="content"> 
       <br>
       <h3 id='storyTitle'><i>{{ story.title }}</i></h3>
+      
+      <span class="icon">
+        <i class="fa fa-quote-left"></i>
+      </span>
       <story-word ng-repeat='word in story.words track by $index' content="word" index="$index">
       </story-word>
       <div class='storyButtons'>
