@@ -15,7 +15,10 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'hbs');
 
 //Connect to mongodb.
-mongoose.connect('mongodb://localhost/english_scripts');
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/english_scripts');
 
 //Require Story model.
 var Story= require('./models/story');
@@ -105,6 +108,4 @@ app.get('*', function (req, res) {
 });
 
 //Liten on port 3000.
-app.listen(3000, function() {
-  console.log('listening on 3000');
-});
+app.listen(process.env.PORT || 3000);
