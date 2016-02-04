@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
-//Connect w/ db. 
-mongoose.connect('mongodb://localhost/english_scripts');
+//Connect w/ mongolab url. 
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/english_scripts');
+
 //Require Story model.
 var Story = require('./models/story');
 

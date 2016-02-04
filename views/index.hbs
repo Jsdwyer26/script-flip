@@ -23,9 +23,23 @@
     <!-- custom script (angular app) -->
     <script type="text/javascript" src="scripts/app.js"></script>
 
-  <title>Index</title>
+  <title>Script-Flip</title>
 </head>
 <body>
+    <header class="header">
+      <div class="container">
+        <!-- Left side -->
+        <div class="header-left">
+          <p class="header-item">
+            <i class="title">Flip Script</i>
+          </p>
+          <p> 
+            <a class="header-tab" ng-href="/about"> About</a>
+          </p> 
+        </div>
+      </div>
+    </header> 
+
   <div ng-view></div>
 
 </body>
