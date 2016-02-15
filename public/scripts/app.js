@@ -68,7 +68,8 @@ app.directive('storyWord', function($compile) {
         return content[0];
       }
     };
-    //If string, return
+   
+    // If string, return.
     scope.shouldShowCode = function(content) {
       if (typeof(content) == 'string') {
         return false;
@@ -84,26 +85,28 @@ app.directive('storyWord', function($compile) {
         return 'underline';
       }
     };
+   scope.lineBreak = function(i) {
+        console.log(i);
+    };
     
 
     element.html(
       //if 'content' === 
       /*'<br ng-show="index%10==0">'+*/
-     /*'<span class="icone" ng-show="index==0"><i class="fa fa-quote-left"></i><span>' + */
       '<br ng-show="index%12==0">'+
       '<span ' + 
         'class="jsWords" ' + 
         'ng-init="changeBack=true" ' +  
         'ng-class="codeStyle(content)" ' + 
         /*'ng-mouseover="showCode=changeBack && shouldShowCode(content)" ' + */
-        'ng-click="showCode=shouldShowCode(content)" ' + 
+        'ng-click="showCode=shouldShowCode(content); lineBreak(index)" ' + 
         /*'ng-mouseout="changeBack=true" ' +*/
         'ng-show="!showCode">{{ formatForShow(content) }}' + 
         '</span>' + 
       '<span ' + 
         'class="engWords underline" ' + 
         'ng-show="showCode" '+ 
-        'ng-click="showCode=false; changeBack=false">{{ content[1] }}' + 
+        'ng-click="showCode=false; changeBack=false; lineBreak(index)">{{ content[1] }}' + 
         '</span> ').show();
 
     $compile(element.contents())(scope);
