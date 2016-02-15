@@ -42,7 +42,7 @@ app.post('/api/stories', function (req, res){
   var newStory = new Story(req.body);
 
   //Save new Story in db.
-  newStory.savee(function (err, savedStory){
+  newStory.save(function (err, savedStory){
     if (err) {
       res.status(500).json({ error: err.message })
     } else {
@@ -108,4 +108,6 @@ app.get('*', function (req, res) {
 });
 
 //Liten on port 3000.
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, function() {
+  console.log('listening on 3000');
+});

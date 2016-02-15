@@ -7,7 +7,7 @@ mongoose.connect(
 
 //Require Story model.
 var Story = require('./models/story');
-
+//Needs to be refactored so it can be created on one iteration.
 var theLittleEngine = "A little railroad engine was employed about a station yard for such work as it was built for, pulling a few cars on and off the switches. One morning it was waiting for the next call when a long train of freight-cars asked a large engine in the roundhouse to take it over the hill. 'I can't; that is too much a pull for me', said the great engine built for hard work. Then the train asked another engine, and another, only to hear excuses and be refused. In desperation, the train asked the little switch engine to draw it up the grade and down on the other side. 'I think I can', puffed the little locomotive, and put itself in front of the great heavy train. As it went on the little engine kept bravely puffing faster and faster, 'I think I can, I think I can, I think I can.' As it neared the top of the grade, which had so discouraged the larger engines, it went more slowly. However, it still kept saying, 'I—think—I—can, I—think—I—can.' It reached the top by drawing on bravery and then went on down the grade, congratulating itself by saying, 'I thought I could, I thought I could.'";
 var aLittleFable = "‘Alas,' said the mouse, 'the whole world is growing smaller every day. At the beginning it was so big that I was afraid, I kept running and running, and I was glad when I saw walls far away to the right and left, but these long walls have narrowed so quickly that I am in the last chamber already, and there in the corner stands the trap that I must run into.’ 'You only need to change your direction,' said the cat, and ate it up.";
 var lp5 = "As each day passed I would learn, in our talk, something about the little prince's planet, his departure from it, his journey. The information would come very slowly, as it might chance to fall from his thoughts. It was in this way that I heard, on the third day, about the catastrophe of the baobabs. This time, once more, I had the sheep to thank for it. For the little prince asked me abruptly--as if seized by a grave doubt--'It is true, isn't it, that sheep eat little bushes?'";
@@ -32,14 +32,18 @@ function convertWords(title, story) {
     var word = taggedWord[0];
     var tag = taggedWord[1];
     //Tagging nouns, setting to variables.
+    //I. Allow and push only words as first i in array.
     if(!wordsReg.test(word)) {
       checkedText.push(word);
+      //II. Tag nouns and pass in as tuple with both forms of the word.
     } else if (tag == 'NN' || tag == 'NNP' || tag == 'NNPS') {
       tag = 'var ' + word + ';';
       checkedText.push([word, tag]);
+      //III. Tag verbs.
     } else if (tag == 'VB' || tag == 'VBD' || tag == 'VBG' || tag == 'VBN' || tag == 'VBP' || tag == 'VBZ') {
       tag = 'function ' + word + '() {};';
       checkedText.push([word, tag]);
+      //IV. No tag, no tuple.
     } else {
       checkedText.push(word);
     }
