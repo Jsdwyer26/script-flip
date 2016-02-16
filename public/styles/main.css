@@ -1,20 +1,21 @@
+ /*
+Sepia: #704214;
+Sepia b/g: #FFF6E5;
+ */
  html {
   background-color: #FFF6E5;
  } 
  
  /*Homepage Styles */
- .navbar {
-  /*background-color: #B7521E;*/
- }
- .aboutLink {
+
+.aboutLink {
   color: white;
  }
-/*.siteTitle {
-  font-size: 3.0em;
-}*/
 .homeTitles {
+  color: #704214;
+  font-family: 'Merriweather', serif;
   font-size: 3.0em;
-  font-weight: 300;
+  font-weight: 400;
   font-style: italic;
   line-height: 1.5;
   list-style-type: none;
@@ -26,13 +27,14 @@ a {
   color: rgb(0, 0, 0);
 }
 li a {
-  color: rgba(0, 0, 0, 1);
+  color: #704214;
   text-decoration: none;
 }
 .titleBase {
   transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 }
 .titleBase.titleOver {
+  color: #704214;
   font-size: 1.2em;
 }
 
@@ -43,19 +45,33 @@ li a {
 /*  font-weight: 500;*/
   text-align: center;
 }
-#story {
+/*#story {
   background-color: #FFF6E5;
-  color: #704214;
+  
   cursor: pointer;
+  font-family: 'Merriweather', serif;
   font-size: 1.5em;
-  font-weight: 200;
+  font-weight: 200;*
   text-indent: 3em;
   text-align: left;
   letter-spacing: .03em;
   line-height: 1.5;
   margin: 10px 80px 10px;
   padding: 20px 45px 75px;
+}*/
+#storyPage {
+  background-color: #FFF6E5;
+  color: #704214;
 } 
+.storyText {
+  cursor: pointer;
+  font-family: 'Merriweather', serif;
+  font-size: 1.75em;
+  letter-spacing: .03em;
+}
+.storySpan {
+  vertical-align: top;
+}
 .hidden {
   display: none;
   visibility: hidden;
@@ -107,6 +123,13 @@ Animate
   line-height: 0;
   opacity: 0;
 }
+
+/* Add Story Page */
+.addStoryPage {
+  background-color: #FFF6E5;
+}
+
+
 /*About Page */
 #aboutTitle {
   color: rgb(0, 0, 0);
@@ -116,9 +139,11 @@ Animate
   text-align: center;
 }
 #aboutBody {
+  color: #704214;
+  font-family: 'Merriweather', serif;
   color: rgb(0, 0, 0);
-  font-size: 2em;
-  font-weight: 100;
+  font-size: 1.7em;
+  font-weight: 200;
   text-align: center;
   letter-spacing: .03em;
   line-height: 1.5;

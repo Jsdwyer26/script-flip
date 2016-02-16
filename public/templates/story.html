@@ -1,14 +1,14 @@
-<section class="section" id="story">
+<a ng-href="/" ng-click="deleteStory(story)">Delete</a>
+<section class="section" id="storyPage">
   <div class="container" >
     <div class="content"> 
-      
       <h3 id='storyTitle'><i>{{ story.title }}</i></h3>
-      <br>
-      <span class="icon">
-        <i class="fa fa-quote-left"></i>
-      </span>
-      <story-word ng-repeat='word in story.words track by $index' content="word" index="$index">
-      </story-word>
-    </div>
+      <br>     
+      <span class="storySpan "><i class="fa fa-quote-left fa-pull-left underline"></i></span>
+      <span class="storySpan storyText"><story-word ng-repeat='word in story.words track by $index' content="word" index="$index">
+      </story-word></span>
+      <span class="storySpan "><i class="fa fa-quote-right"></i></span>
+    </div>  
   </div>  
-</section> 
+</section>
+

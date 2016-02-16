@@ -21,7 +21,9 @@ mongoose.connect(
   'mongodb://localhost/english_scripts');
 
 //Require Story model.
-var Story= require('./models/story');
+var Story = require('./models/story');
+
+var convertStory = require('./importStory');
 
 //API ROUTES
 
@@ -40,12 +42,14 @@ app.get('/api/stories', function (req, res) {
 //CREATE new story.
 app.post('/api/stories', function (req, res){
   var newStory = new Story(req.body);
-
+  storyString = newStory.words.toString();
+  console.log(convertStory(newStory.title, storyString) + ' function line');
   //Save new Story in db.
-  newStory.savee(function (err, savedStory){
+  newStory.save(function (err, savedStory) {
     if (err) {
-      res.status(500).json({ error: err.message })
+      res.status(500).json({ error: err.message });
     } else {
+      /**/
       res.json(savedStory);
     }
   });
@@ -93,7 +97,7 @@ app.put('/api/stories/:id', function (req, res) {
 app.delete('/api/stories/:id', function (req, res) {
   var storyId = req.params.id;
 
-  Story.findOneAndRemove({ _id: storyId }, function (deletedStory) {
+  Story.findOneAndRemove({ _id: storyId }, function (err, deletedStory) {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
@@ -108,4 +112,6 @@ app.get('*', function (req, res) {
 });
 
 //Liten on port 3000.
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, function() {
+  console.log('listening on 3000');
+});
