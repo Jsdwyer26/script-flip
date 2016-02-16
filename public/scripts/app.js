@@ -10,6 +10,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       templateUrl: 'templates/story.html',
       controller: 'StoryCtrl'
     })
+    .when('/author', {
+      templateUrl: 'templates/create.html',
+      controller: 'CreateCtrl'
+    })
     .when('/about', {
       templateUrl: 'templates/about.html',
       controller: 'AboutCtrl'
@@ -33,6 +37,11 @@ app.factory('Story', ['$resource', function($resource) {
     }
   });
 }]);
+/*{ 'get':    {method:'GET'},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} };*/
 
 //CTRLers
 //Home Ctrl.
@@ -48,11 +57,33 @@ app.controller('StoryCtrl', ['$scope', 'Story', '$routeParams', function($scope,
   $scope.story = Story.get({
     id: $routeParams.id
   });
+  $scope.deleteStory = function(story) {
+    Story.remove({ id: $routeParams.id });
+  };
+
+}]);
+
+// Story create Ctrl.
+app.controller('CreateCtrl', ['$scope', 'Story', function($scope, Story){
+  $scope.createTest = 'Create Ctrl Test';
+  $scope.story = {};
+  $scope.checkTst = function() {
+    console.log('foo');
+  };
+  $scope.createStory = function() {
+    console.log('foo');
+    var newStory = Story.save($scope.story);
+    $scope.story = {};
+    console.log(newStory);
+  };
+
+
 }]);
 
 //About Ctrl.
 app.controller('AboutCtrl', ['$scope', function($scope) {
   $scope.aboutCtrlTest = 'About Ctrl Test';
+
 }]);
 
 
@@ -99,7 +130,7 @@ app.directive('storyWord', function($compile) {
         'ng-init="changeBack=true" ' +  
         'ng-class="codeStyle(content)" ' + 
         /*'ng-mouseover="showCode=changeBack && shouldShowCode(content)" ' + */
-        'ng-click="showCode=shouldShowCode(content); lineBreak(index)" ' + 
+        'ng-click="showCode=shouldShowCode(content)" ' + 
         /*'ng-mouseout="changeBack=true" ' +*/
         'ng-show="!showCode">{{ formatForShow(content) }}' + 
         '</span>' + 

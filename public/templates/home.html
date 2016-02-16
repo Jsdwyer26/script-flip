@@ -1,4 +1,7 @@
 <div>
+  <ul>
+    <li><a href="/create"></a></li>
+  </ul>
   <ul class="homeList">
     <li ng-repeat="v in stories" class="homeTitles" ng-mouseover="myClass='titleOver'" ng-mouseout="myClass=''">
       <a class="titleBase" ng-href="/story/{{v._id}}" ng-class="myClass">{{ v.title }}</a>

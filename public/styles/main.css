@@ -123,6 +123,13 @@ Animate
   line-height: 0;
   opacity: 0;
 }
+
+/* Add Story Page */
+.addStoryPage {
+  background-color: #FFF6E5;
+}
+
+
 /*About Page */
 #aboutTitle {
   color: rgb(0, 0, 0);

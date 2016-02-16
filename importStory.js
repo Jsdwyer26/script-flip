@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+/*var mongoose = require('mongoose');
 //Connect w/ mongolab url. 
 mongoose.connect(
   process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
-  'mongodb://localhost/english_scripts');
+  'mongodb://localhost/english_scripts');*/
 
 //Require Story model.
 var Story = require('./models/story');
@@ -16,24 +16,25 @@ var lp10 = "He found himself in the neighborhood of the asteroids 325, 326, 327,
 var metamorph = "One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. 'What's happened to me?' he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.";
 
 //POS.
-var pos = require('pos');
+/*var pos = require('pos');*/
 
-
-function convertWords(title, story) {
+// Inputs are strings. 
+var convertWords = function(title, story) {
+  var pos = require('pos');
   //Pass in story here.
   var wordsReg = new RegExp(/([a-zA-Z])/g);
   var words = new pos.Lexer().lex(story);
   var tagger = new pos.Tagger();
   var taggedWords = tagger.tag(words);
   var checkedText = [];
-
+  // Outputs checked text list.
   for (var i in taggedWords) {
     var taggedWord = taggedWords[i];
     var word = taggedWord[0];
     var tag = taggedWord[1];
     //Tagging nouns, setting to variables.
     //I. Allow and push only words as first i in array.
-    if(!wordsReg.test(word)) {
+    if (!wordsReg.test(word)) {
       checkedText.push(word);
       //II. Tag nouns and pass in as tuple with both forms of the word.
     } else if (tag == 'NN' || tag == 'NNP' || tag == 'NNPS') {
@@ -48,7 +49,7 @@ function convertWords(title, story) {
       checkedText.push(word);
     }
   }
-
+  console.log(checkedText);
   Story.create({
     title: title,
     words: checkedText
@@ -56,11 +57,14 @@ function convertWords(title, story) {
     if (err) return handleError(err);
     console.log('saved');
   });
-}
+  console.log(story);
+};
 console.log('saving json story');
 
-convertWords('The Metamorphosis', metamorph);
+module.exports = convertWords;
+
+/*convertWords('The Metamorphosis', metamorph);
 convertWords('The Little Engine that Could', theLittleEngine);
 convertWords('A Little Fable', aLittleFable);
 convertWords('The Little Prince, Ch.5', lp5);
-convertWords('The Little Prince, Ch.8', lp8);
+convertWords('The Little Prince, Ch.8', lp8);*/
