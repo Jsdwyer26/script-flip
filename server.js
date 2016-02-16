@@ -43,16 +43,15 @@ app.get('/api/stories', function (req, res) {
 app.post('/api/stories', function (req, res){
   var newStory = new Story(req.body);
   storyString = newStory.words.toString();
-  console.log(convertStory(newStory.title, storyString) + ' function line');
+  convertStory(newStory.title, storyString);
   //Save new Story in db.
-  newStory.save(function (err, savedStory) {
+ /* newStory.save(function (err, savedStory) {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
-      /**/
       res.json(savedStory);
     }
-  });
+  });*/
 });
 
 //GET ONE story.

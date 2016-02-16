@@ -120,7 +120,6 @@ app.directive('storyWord', function($compile) {
         console.log(i);
     };
     
-
     element.html(
       //if 'content' === 
       /*'<br ng-show="index%10==0">'+*/
