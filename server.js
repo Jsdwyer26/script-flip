@@ -3,33 +3,32 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose');
 
-//Configure bodyParser for recieving form data.
+// Configure bodyParser for recieving form data.
 app.use(bodyParser.urlencoded({ extended: true }));
-//Let bodyParser to send and recieve JSON data.
+// Let bodyParser to send and recieve JSON data.
 app.use(bodyParser.json());
 
-//Serve static files from public folder.
+// Serve static files from public folder.
 app.use(express.static(__dirname + '/public'));
 
-//Set view engine to hbs.
+// Set view engine to hbs.
 app.set('view engine', 'hbs');
 
-//Connect to mongodb.
+// Connect to mongodb.
 mongoose.connect(
   process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
   'mongodb://localhost/english_scripts');
 
-//Require Story model.
 var Story = require('./models/story');
-
+// Where string tagging functions happen.
 var convertStory = require('./importStory');
 
-//API ROUTES
+// API ROUTES
 
-//GET all stories
+// GET all stories
 app.get('/api/stories', function (req, res) {
-  //Find all stories in db.
+  // Find all stories in db.
   Story.find(function (err, allStories) {
     if (err) {
       res.status(500).json({ error: err.message });
@@ -39,27 +38,21 @@ app.get('/api/stories', function (req, res) {
   });
 });
 
-//CREATE new story.
+// CREATE new story.
 app.post('/api/stories', function (req, res){
   var newStory = new Story(req.body);
+  // Convert story's words to be passed as a str. into convertStory(). 
   storyString = newStory.words.toString();
+  // Save new Story in db.
   convertStory(newStory.title, storyString);
-  //Save new Story in db.
- /* newStory.save(function (err, savedStory) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-    } else {
-      res.json(savedStory);
-    }
-  });*/
 });
 
-//GET ONE story.
+// GET ONE story.
 app.get('/api/stories/:id', function (req, res) {
-  //GET story id from url params ('req.params').
+  // GET story id from url params ('req.params').
   var storyId = req.params.id;
 
-  //Find story in db by id.
+  // Find story in db by id.
   Story.findOne({ _id: storyId }, function (err, foundStory){
     if (err) {
       res.status(500).json({ error: err.message });
@@ -69,9 +62,9 @@ app.get('/api/stories/:id', function (req, res) {
   });
 });
 
-//UPDATE Story.
+// UPDATE Story.
 app.put('/api/stories/:id', function (req, res) {
-  //Find story from id url params ('req.params').
+  // Find story from id url params ('req.params').
   Story.findOne({ _id: storyId }, function (err, foundStory) {
     if (err) {
       res.status(500).json({ error: err.message });
@@ -80,7 +73,7 @@ app.put('/api/stories/:id', function (req, res) {
       foundStory.title = req.body.title;
       foundStory.words = req.body.words;
 
-      //Save updated story in db.
+      // Save updated story in db.
       foundStory.save(function (err, savedStory){
         if (err) {
           res.status(500).json({ error: err.message });
@@ -92,7 +85,7 @@ app.put('/api/stories/:id', function (req, res) {
   });
 });
 
-//DELETE story.
+// DELETE story.
 app.delete('/api/stories/:id', function (req, res) {
   var storyId = req.params.id;
 
@@ -105,12 +98,12 @@ app.delete('/api/stories/:id', function (req, res) {
   });
 });
 
-//Catch route. Sends every server-requested route to index.hbs(main layout).
+// Catch route. Sends every server-requested route to index.hbs(main layout).
 app.get('*', function (req, res) {
   res.render('index');
 });
 
-//Liten on port 3000.
+// Liten on port 3000.
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on 3000');
 });

@@ -77,7 +77,6 @@ app.controller('CreateCtrl', ['$scope', 'Story', function($scope, Story){
     console.log(newStory);
   };
 
-
 }]);
 
 //About Ctrl.
@@ -116,8 +115,12 @@ app.directive('storyWord', function($compile) {
         return 'underline';
       }
     };
-   scope.lineBreak = function(i) {
-        console.log(i);
+    scope.lineBreak = function(content) {
+      var breaks = new RegExp(/[.]/g);
+      console.log(content);
+      var found = breaks.test(content);
+      //console.log(found);
+
     };
     
     element.html(
@@ -129,14 +132,14 @@ app.directive('storyWord', function($compile) {
         'ng-init="changeBack=true" ' +  
         'ng-class="codeStyle(content)" ' + 
         /*'ng-mouseover="showCode=changeBack && shouldShowCode(content)" ' + */
-        'ng-click="showCode=shouldShowCode(content)" ' + 
+        'ng-click="showCode=shouldShowCode(content); lineBreak(content)" ' + 
         /*'ng-mouseout="changeBack=true" ' +*/
         'ng-show="!showCode">{{ formatForShow(content) }}' + 
         '</span>' + 
       '<span ' + 
         'class="engWords underline" ' + 
         'ng-show="showCode" '+ 
-        'ng-click="showCode=false; changeBack=false; lineBreak(index)">{{ content[1] }}' + 
+        'ng-click="showCode=false; changeBack=false; ">{{ content[1] }}' + 
         '</span> ').show();
 
     $compile(element.contents())(scope);
