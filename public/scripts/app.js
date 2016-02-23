@@ -126,7 +126,7 @@ app.directive('storyWord', function($compile) {
     element.html(
       //if 'content' === 
       /*'<br ng-show="index%10==0">'+*/
-      '<br ng-show="index%12==0">'+
+      '<br ng-show="index%15==0">'+
       '<span ' + 
         'class="jsWords" ' + 
         'ng-init="changeBack=true" ' +  
