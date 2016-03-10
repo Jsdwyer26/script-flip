@@ -20,43 +20,43 @@ var metamorph = "One morning, when Gregor Samsa woke from troubled dreams, he fo
 
 // Inputs are strings.  
 var convertWords = function(title, story) {
-  var pos = require('pos');
-  var wordsReg = new RegExp(/([a-zA-Z])/g);
-  // Pass in story here.
-  var words = new pos.Lexer().lex(story);
-  var tagger = new pos.Tagger();
-  var taggedWords = tagger.tag(words);
-  var checkedText = [];
+    var pos = require('pos');
+    var wordsReg = new RegExp(/([a-zA-Z])/g);
+    // Pass in story here.
+    var words = new pos.Lexer().lex(story);
+    var tagger = new pos.Tagger();
+    var taggedWords = tagger.tag(words);
+    var checkedText = [];
   // Outputs checkedText list.
-  for (var i in taggedWords) {
-    var taggedWord = taggedWords[i];
-    var word = taggedWord[0];
-    var tag = taggedWord[1];
-    // Tagging nouns, setting to variables.
-    // I. Allow and push only words as first i in array.
-    if(!wordsReg.test(word)) {
-      checkedText.push(word);
-      // II. Tag nouns and pass in as tuple with both forms of the word.
-    } else if(tag == 'NN' || tag == 'NNP' || tag == 'NNPS') {
-      tag = 'var ' + word + ';';
-      checkedText.push([word, tag]);
-      // III. Tag verbs.
-    } else if(tag == 'VB' || tag == 'VBD' || tag == 'VBG' || tag == 'VBN' || tag == 'VBP' || tag == 'VBZ') {
-      tag = 'function ' + word + '() {};';
-      checkedText.push([word, tag]);
-      // IV. No tag, no tuple.
-    } else {
-      checkedText.push(word);
-    }
+  for(var i in taggedWords) {
+      var taggedWord = taggedWords[i];
+      var word = taggedWord[0];
+      var tag = taggedWord[1];
+      // Tagging nouns, setting to variables.
+      // I. Allow and push only words as first i in array.
+      if(!wordsReg.test(word)) {
+        checkedText.push(word);
+        // II. Tag nouns and pass in as tuple with both forms of the word.
+      } else if(tag == 'NN' || tag == 'NNP' || tag == 'NNPS' || tag == 'NNS') {
+        tag = 'var ' + word + ';';
+        checkedText.push([word, tag]);
+        // III. Tag verbs.
+      } else if(tag == 'VB' || tag == 'VBD' || tag == 'VBG' || tag == 'VBN' || tag == 'VBP' || tag == 'VBZ') {
+        tag = 'function ' + word + '() {};';
+        checkedText.push([word, tag]);
+        // IV. No tag, no tuple.
+      } else {
+        checkedText.push(word);
+      }
   }
   console.log(checkedText);
   // Save story. 
   Story.create({
-    title: title,
-    words: checkedText
+      title: title,
+      words: checkedText
   }, function(err, small) {
-    if (err) return handleError(err);
-    console.log('saved');
+        if(err) return handleError(err);
+        console.log('saved');
   });
   console.log(story);
 };
